@@ -1,0 +1,40 @@
+import java.io.File;
+import java.io.FileFilter;
+
+public class FileFilterLambdaExample {
+
+	
+	public static void main (String... args){
+		
+		
+//		FileFilter fileFilter = getFileFilter();
+		
+		FileFilter fileFilter = getFileFilterLambda();
+		
+		File dir = new File ("C:/Users/I658174/Desktop");
+		
+		File[] result  = dir.listFiles(fileFilter);
+		 
+		for(File file : result){
+			System.out.println(file.getName());
+		}
+	}
+
+	private static FileFilter getFileFilterLambda() {
+		FileFilter fileFilter=(pathname) -> {
+				return pathname.getName().endsWith(".txt");
+			};
+		return fileFilter;
+	}
+
+	@Deprecated
+	private static FileFilter getFileFilter() {
+		FileFilter fileFilter=new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return pathname.getName().endsWith(".txt");
+			}
+		};
+		return fileFilter;
+	}
+}
