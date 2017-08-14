@@ -1,0 +1,54 @@
+package com.java.java8;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+public class PredicateExample {
+
+	public static void main(String... args) {
+		java.util.Random random = new Random();
+		List<Integer> list = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			list.add(random.nextInt(1000));
+		}
+		/**
+		 * For testing case just add temporary
+		 */
+		list.add(730);
+		
+		list.forEach(System.err::println);
+		System.out.println("***************************************************************************************");
+		/**
+		 * First Way
+		 */
+		java.util.function.Predicate<Integer> predicate = t -> t > 500;
+		Stream<Integer> stream = list.stream();
+		Stream<Integer> result = stream.filter(predicate);
+		result.forEach(System.out::println);
+		/**
+		 * Second Way
+		 */
+		System.out.println("***************************************************************************************");
+		java.util.function.Predicate<Integer> predicateA = t -> t < 500;
+		list.stream().filter(predicateA).forEach(System.out::println);
+		/**
+		 * Third Way
+		 * How we can use predicate
+		 */
+		System.out.println("***************************************************************************************");
+		java.util.function.Predicate<Integer> p1 = t -> t < 500;
+		java.util.function.Predicate<Integer> p2 = t -> t > 500;
+		list.stream().filter(p1.or(p2)).forEach(System.out::println);
+		
+		/**
+		 * Fourth Way
+		 * How we can use predicate
+		 */
+		System.out.println("***************************************************************************************");
+		Predicate<Integer> p3 = Predicate.isEqual(730);
+		list.stream().filter(p3).forEach(System.out::println);
+	}
+}
