@@ -1,0 +1,85 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Consumer;
+
+public class ListLambdaExample {
+
+	public static void main(String... args) {
+		java.util.Random random = new Random();
+		List<Integer> list = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			list.add(random.nextInt());
+		}
+
+		/**
+		 * How to use Consumer with List
+		 */
+		/**
+		 * First Way
+		 */
+		list.forEach(new Consumer<Integer>() {
+			@Override
+			public void accept(Integer t) {
+				System.out.println(t);
+			}
+		});
+
+		/**
+		 * Second Way
+		 */
+		Consumer<Integer> consumer = i -> System.out.println(i);
+		list.forEach(consumer);
+
+		/**
+		 * Third Way
+		 */
+		list.forEach(System.out::println);
+
+		/**
+		 * Fourth Way
+		 */
+		list.forEach(t -> System.out.println(t));
+
+		/**
+		 * Fifth Way
+		 */
+		list.forEach(t -> {
+			System.out.println(t * 2);
+		});
+
+		/**
+		 * Add a list to another list ****************************************
+		 */
+		List<Integer> listAA = new ArrayList<>();
+		/**
+		 * First Way
+		 */
+		Consumer<Integer> consumerAA = listAA::add;
+		list.forEach(consumerAA);
+		listAA.forEach(System.err::println);
+
+		/**
+		 * Second Way
+		 */
+		List<Integer> listBB = new ArrayList<>();
+		Consumer<Integer> consumerBB = new Consumer<Integer>() {
+			@Override
+			public void accept(Integer t) {
+				listBB.add(t);
+			}
+		};
+		list.forEach(consumerBB);
+		listBB.forEach(System.err::println);
+
+		/**
+		 * Third Way
+		 */
+		List<Integer> listCC = new ArrayList<>();
+		Consumer<Integer> consumerCC = System.out::println;
+		Consumer<Integer> consumerDD = listCC::add;
+		list.forEach(consumerCC.andThen(consumerDD));
+		listCC.forEach(System.err::println);
+		
+	}
+}
