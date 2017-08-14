@@ -11,7 +11,7 @@ public class FileFilterLambdaExample {
 		
 		FileFilter fileFilter = getFileFilterLambda();
 		
-		File dir = new File ("C:/Users/I658174/Desktop");
+		File dir = new File ("/home/gourav/workspace");
 		
 		File[] result  = dir.listFiles(fileFilter);
 		 
