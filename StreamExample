@@ -1,0 +1,47 @@
+ 
+
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+/** 
+ * Streams have Map/Filter/Reduce
+ * Please check PredicateExample for streams 
+ * @author Gourav Garg
+ *
+ */
+public class StreamExample {
+
+	public static void main(String[] args) {
+
+		java.util.List<String> list = new java.util.ArrayList<>();
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		list.add("D");
+		list.add("E");
+		list.add("F");
+
+		java.util.List<String> listX = new java.util.ArrayList<>();
+
+		Consumer<String> c1 = listX::add;
+
+		Consumer<String> c2 = System.out::println;
+
+		Consumer<String> c3 = c1.andThen(c2);
+
+		/**
+		 * First Way, here we didn't use streams. Just an example of Consumer
+		 * default methods i.e. andThen etc
+		 */
+		list.forEach(c3);
+		System.out.println("Size of ListX=" + listX.size());
+
+		/**
+		 * Second Way we are using by streams 
+		 */
+		Stream<String> stream = list.stream();
+		stream.forEach(c2);
+		
+		
+	}
+
+}
