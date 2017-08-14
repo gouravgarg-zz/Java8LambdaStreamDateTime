@@ -1,0 +1,41 @@
+public class RunnableLambdaExample {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+//		Runnable runnable = getRunnbale();
+		Runnable runnable = getRunnbaleLambda();
+		Thread thread = new Thread(runnable,"ABC Thread");
+		thread.start();
+		thread.join();
+		System.out.println("Done!!!!" + Thread.currentThread().getName());
+	}
+
+	private static Runnable getRunnbaleLambda(){
+		Runnable runnable = ()->{
+			for (int i = 0; i < 3; i++) {
+					System.out.println("Name: "+Thread.currentThread().getName());
+			}
+		};
+		return runnable;
+	}
+	private static Runnable getRunnbale() {
+		Runnable runnable =new Runnable() {
+			@Override
+			public void run() {
+				for (int i = 0; i < 3; i++) {
+					synchronized (this) {
+						try {
+							wait(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						System.out.println("Name: "+Thread.currentThread().getName());
+					}	
+				} 
+			}
+		};
+		return runnable;
+	}
+	
+
+}
