@@ -1,0 +1,13 @@
+public class MyFunctionalInterfaceTest {
+
+public static void main(String[] args) throws InterruptedException {
+		
+		MyFunctionalInterface functionalInterface = ()->  System.out.println("MyFunctionalInterface Some Method");
+		 
+		
+		functionalInterface.someMethod();
+		functionalInterface.someMethod1();
+		
+		System.out.println("Done!!!!" + Thread.currentThread().getName());
+	}
+}
