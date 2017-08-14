@@ -1,0 +1,23 @@
+public class MethodRefrencesExample {
+
+	public static void main (String... args){
+		String[] strArray=new String[]{"A****","B***","C**","D*","E"};
+		
+		java.util.List<String> list = java.util.Arrays.asList(strArray);
+		
+		Consumer<String> consumer=s-> System.out.println(s);
+		
+		for (String string : list) {
+			consumer.accept(string);
+		}
+		
+		Consumer<String> consumerMR =  System.err::println;
+		for (String string : list) {
+			consumerMR.accept(string);
+		}	
+		
+		java.util.Comparator<Integer> comparator=(x,y) -> Integer.compare(x, y);
+		
+		java.util.Comparator<Integer> comparatorMR=Integer::compare;
+	}
+}
