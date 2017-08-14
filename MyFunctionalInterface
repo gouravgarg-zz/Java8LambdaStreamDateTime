@@ -1,0 +1,11 @@
+@FunctionalInterface
+public interface MyFunctionalInterface {
+
+	void someMethod();
+	
+	default void someMethod1(){
+		System.out.println("MyFunctionalInterface Hello someMethod1 ");
+	}
+	
+	public boolean equals(Object obj) ;
+}
